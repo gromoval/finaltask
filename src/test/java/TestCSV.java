@@ -1,3 +1,5 @@
+import decorators.DataSourceDecorator;
+import decorators.FileDataSource;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -10,13 +12,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TestCSV {
-    @DataProvider
+
 
     /**
      * Метод для получения данных из csv
      */
+    @DataProvider
     public static Object[] usingCSV() {
-//        String csvFile = "target/data.csv"; //на данный момент решили поместить файл в папку resourses
+//        String csvFile = "target/data.csv"; //на данный момент решили поместить файл в папку resources
         String csvFile = "src/main/resources/data.csv";
         String line;
         String csvSplitBy = ",";
@@ -37,6 +40,7 @@ public class TestCSV {
     /**
      * Метод для вывода данных из csv
      */
+
     public static void main(String[] args) {
         String csvFile = "src/main/resources/data.csv";
         String line = null;
@@ -61,8 +65,27 @@ public class TestCSV {
         }
     }
 
+
     /**
-     * Тест для проверки использования данных из csv
+     * Метод для вывода данных из файла с использованием паттерна Декоратор
+     */
+/*
+    public static void main(String[] args) {
+        String name = "src/main/resources/test.csv";
+        DataSourceDecorator test = new DataSourceDecorator(new FileDataSource(name));
+        System.out.println(test.readData());
+    }
+ */
+
+    /**
+     * Заготовка метода для получения данных из файла с использованием паттерна Декоратор
+     */
+
+//    @DataProvider
+//    public static Object[] usingDecorator(){ }
+
+    /**
+     * Тест для проверки использования данных
      */
     @Test(dataProvider = "usingCSV")
     public void testCsvS(String s) {
@@ -70,5 +93,4 @@ public class TestCSV {
         Assert.assertEquals(s, res, "Тест не пройден");
         System.out.println("Тест пройден:\n" + "Ожидаемый результат " + s + ", Фактический результат " + res);
     }
-
 }
