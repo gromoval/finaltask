@@ -6,7 +6,6 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-
 @CucumberOptions(
         strict = true,
         features = {"src/test/resources/features"},
