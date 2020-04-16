@@ -2,15 +2,20 @@ package entities;
 
 import org.openqa.selenium.WebElement;
 import pages.TestPageAuthForm;
+import pages.TestPageThemes;
 
 public class PagesProvider {
-    private  TestPageAuthForm pageAuthForm = new TestPageAuthForm();
+    private TestPageAuthForm pageAuthForm = new TestPageAuthForm();
+    private TestPageThemes testPageThemes = new TestPageThemes();
 
     public WebElement getElementOnPage (String nameOfPage, String nameOfElement) {
         WebElement webElement = null;
         switch (nameOfPage){
             case "Страница_авторизации":
                 webElement = pageAuthForm.get(nameOfElement);
+                break;
+            case "Страница_Темы":
+                webElement = testPageThemes.get(nameOfElement);
                 break;
             default: webElement=null;
         }
