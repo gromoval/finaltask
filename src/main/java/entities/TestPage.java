@@ -7,8 +7,6 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.List;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.LoadableComponent;
-import pages.TestPageAuthForm;
 import webdriver.DriverFactory;
 
 public abstract class TestPage {
