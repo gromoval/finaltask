@@ -15,16 +15,12 @@ public class SharedDriver {
                     driver.manage().window().maximize();
                     DriverFactory.addDriver(driver);
                 }
-
             } catch (NullPointerException e) {
                 WebDriverManager.chromedriver().setup();
                 WebDriver driver = new ChromeDriver();
                 driver.manage().window().maximize();
                 DriverFactory.addDriver(driver);
             }
-
-//            driver.manage().window().maximize();
-//            DriverFactory.addDriver(driver);
         }
     }
 }
