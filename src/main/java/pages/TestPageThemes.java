@@ -1,14 +1,12 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
+import entities.TestPage;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class TestPageThemes {
+public class TestPageThemes extends TestPage {
 
 
     //ннотации добавить
