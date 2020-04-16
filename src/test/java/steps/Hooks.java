@@ -20,11 +20,6 @@ import java.io.IOException;
  */
 public class Hooks {
     public final Logger log = LogManager.getLogger(getClass());
-    private TestPageAuthForm TpafPO;
-
-    public Hooks(SharedDriver driver, TestPageAuthForm TpafPO) {
-        this.TpafPO=TpafPO;
-    }
 
     /**
      *
@@ -33,7 +28,6 @@ public class Hooks {
     @Before(value="@allGUITests")
     public void beforeGUIScenario(Scenario scenario) {
         log.info("Запуск GUI сценария {}", scenario.getName());
-        TpafPO.get();
     }
 
     /**

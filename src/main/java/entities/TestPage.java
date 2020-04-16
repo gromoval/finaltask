@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.LoadableComponent;
 import pages.TestPageAuthForm;
 import webdriver.DriverFactory;
 
-public class TestPage extends LoadableComponent<TestPageAuthForm> {
+public abstract class TestPage{
     private final Logger log = LogManager.getLogger(getClass());
 
     public TestPage() {
@@ -112,15 +112,5 @@ public class TestPage extends LoadableComponent<TestPageAuthForm> {
             }
         }
         throw new IllegalArgumentException("ERROR: there is no such element with name " + cucumberElementName + " at page " + this.getClass().getName());
-    }
-
-    @Override
-    protected void load() {
-
-    }
-
-    @Override
-    protected void isLoaded() throws Error {
-
     }
 }

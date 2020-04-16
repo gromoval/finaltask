@@ -4,9 +4,9 @@ import org.openqa.selenium.WebElement;
 import pages.TestPageAuthForm;
 
 public class PagesProvider {
-//    private static TestPageAuthForm pageAuthForm;
+    private  TestPageAuthForm pageAuthForm = new TestPageAuthForm();
 
-    public static WebElement getElementOnPage (String nameOfPage, String nameOfElement, TestPageAuthForm pageAuthForm) {
+    public WebElement getElementOnPage (String nameOfPage, String nameOfElement) {
         WebElement webElement = null;
         switch (nameOfPage){
             case "Страница_авторизации":
