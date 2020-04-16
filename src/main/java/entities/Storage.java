@@ -19,6 +19,7 @@ public class Storage {
         this.data.put(str, data);
     }
 
+//serialize
 // надо проверить чтобы не достать то чего там нет
 //    public Object getStorageData(String str)
 //    {
