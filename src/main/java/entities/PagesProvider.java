@@ -18,9 +18,6 @@ public class PagesProvider {
             case "Страница_Темы":
                 webElement = testPageThemes.get(nameOfElement);
                 break;
-            case "Страница_Темы":
-                webElement = testPageThemes.get(nameOfElement);
-                break;
             default:
                 webElement = null;
         }

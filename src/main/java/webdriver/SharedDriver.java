@@ -3,6 +3,7 @@ package webdriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class SharedDriver {
@@ -17,7 +18,13 @@ public class SharedDriver {
                 }
             } catch (NullPointerException e) {
                 WebDriverManager.chromedriver().setup();
-                WebDriver driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-extensions");
+                options.addArguments("--disable-dev-shm-usage");
+                WebDriver driver = new ChromeDriver(options);
                 driver.manage().window().maximize();
                 DriverFactory.addDriver(driver);
             }
