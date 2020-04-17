@@ -2,6 +2,8 @@ package steps;
 
 import entities.PagesProvider;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.TestPageAuthForm;
 import io.qameta.allure.Allure;
 import io.cucumber.java.ru.*;
@@ -9,12 +11,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
-
 import webdriver.DriverFactory;
 import webdriver.SharedDriver;
-
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 
 public class GUITestSteps {
@@ -54,7 +53,7 @@ public class GUITestSteps {
     @И("на {string} я нажал на элемент {string}")
     public void clickElement(String nameOfPage, String nameOfElement) {
         try {
-            DriverFactory.getDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+            new WebDriverWait(DriverFactory.getDriver(), 30).until(ExpectedConditions.elementToBeClickable(pagesProvider.getElementOnPage(nameOfPage, nameOfElement)));
             pagesProvider.getElementOnPage(nameOfPage, nameOfElement).click();
         } catch (TimeoutException e) {
             Assert.fail(nameOfElement + " не доступна! " + e.getMessage());

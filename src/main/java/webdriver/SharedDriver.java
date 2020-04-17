@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import java.util.concurrent.TimeUnit;
 
 public class SharedDriver {
     public SharedDriver() {
@@ -26,7 +25,6 @@ public class SharedDriver {
                 options.addArguments("--disable-extensions");
                 options.addArguments("--disable-dev-shm-usage");
                 WebDriver driver = new ChromeDriver(options);
-//                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 driver.manage().window().maximize();
                 DriverFactory.addDriver(driver);
             }
