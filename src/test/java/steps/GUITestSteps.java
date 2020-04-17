@@ -22,10 +22,10 @@ public class GUITestSteps {
     PagesProvider pagesProvider = new PagesProvider();
 
     /**
-     *
      * @param driver
      */
-    public GUITestSteps(SharedDriver driver){}
+    public GUITestSteps(SharedDriver driver) {
+    }
 
     /**
      * @param title String
@@ -42,7 +42,7 @@ public class GUITestSteps {
     @Пусть("я открыл браузер и загрузил страницу {string}")
     public void openBrowserAndLoadSite(String nameOfElement) {
         try {
-            pagesProvider.getElementOnPage(nameOfPage, nameOfElement).click();
+            page.openPage(nameOfElement);
         } catch (TimeoutException e) {
             Assert.fail(nameOfElement + " не доступна! " + e.getMessage());
         } finally {

@@ -1,17 +1,10 @@
-import entities.AbstractTestNGCucumberParallelTests;
+import org.testng.annotations.DataProvider;
 import webdriver.Properties;
-
-import io.qameta.allure.Allure;
 import org.apache.logging.log4j.*;
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import static java.nio.file.StandardOpenOption.READ;
 
 @CucumberOptions(
         strict = true,
@@ -22,7 +15,7 @@ import static java.nio.file.StandardOpenOption.READ;
 /**
  * Класс для запуска API-тестов
  */
-public class TestRunner extends AbstractTestNGCucumberParallelTests {
+public class TestRunner extends AbstractTestNGCucumberTests {
 
     private static Logger log;
     static {
@@ -39,6 +32,12 @@ public class TestRunner extends AbstractTestNGCucumberParallelTests {
     @AfterClass
     public void afterClass() {
         log.info("класс капут");
+    }
+
+    @Override
+    @DataProvider(parallel = true)
+    public Object[][] scenarios() {
+        return super.scenarios();
     }
 
 }

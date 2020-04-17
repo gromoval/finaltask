@@ -11,7 +11,7 @@ public class PagesProvider {
     public WebElement getElementOnPage(String nameOfPage, String nameOfElement) {
         WebElement webElement = null;
         switch (nameOfPage) {
-            case "страница_авторизации":
+            case "Страница_авторизации":
             case "главная_страница":
                 webElement = pageAuthForm.get(nameOfElement);
                 break;

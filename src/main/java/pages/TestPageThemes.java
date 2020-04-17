@@ -88,9 +88,4 @@ public class TestPageThemes extends TestPage {
     @NameOfElement("подписки")
     @FindBy(xpath = "//a[@href='/subscribed/']")
     public WebElement tabSubscribed;
-
-
-
-
-
 }
