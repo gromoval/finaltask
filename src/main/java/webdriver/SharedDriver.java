@@ -26,7 +26,7 @@ public class SharedDriver {
                 options.addArguments("--disable-extensions");
                 options.addArguments("--disable-dev-shm-usage");
                 WebDriver driver = new ChromeDriver(options);
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 driver.manage().window().maximize();
                 DriverFactory.addDriver(driver);
             }

@@ -14,6 +14,7 @@ import webdriver.DriverFactory;
 import webdriver.SharedDriver;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 
 public class GUITestSteps {
@@ -53,6 +54,7 @@ public class GUITestSteps {
     @И("на {string} я нажал на элемент {string}")
     public void clickElement(String nameOfPage, String nameOfElement) {
         try {
+            DriverFactory.getDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             pagesProvider.getElementOnPage(nameOfPage, nameOfElement).click();
         } catch (TimeoutException e) {
             Assert.fail(nameOfElement + " не доступна! " + e.getMessage());
