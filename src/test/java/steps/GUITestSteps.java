@@ -12,10 +12,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
-
 import webdriver.DriverFactory;
 import webdriver.SharedDriver;
-
 import java.io.IOException;
 
 
@@ -58,6 +56,7 @@ public class GUITestSteps {
     @И("на {string} я нажал на элемент {string}")
     public void clickElement(String nameOfPage, String nameOfElement) {
         try {
+            new WebDriverWait(DriverFactory.getDriver(), 30).until(ExpectedConditions.elementToBeClickable(pagesProvider.getElementOnPage(nameOfPage, nameOfElement)));
             pagesProvider.getElementOnPage(nameOfPage, nameOfElement).click();
         } catch (TimeoutException e) {
             Assert.fail(nameOfElement + " не доступна! " + e.getMessage());
