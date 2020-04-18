@@ -2,11 +2,9 @@ package entities;
 
 import org.openqa.selenium.WebElement;
 import pages.TestPageAuthForm;
-import pages.TestPageThemes;
 
 public class PagesProvider {
     private TestPageAuthForm pageAuthForm = new TestPageAuthForm();
-    private TestPageThemes testPageThemes = new TestPageThemes();
 
     public WebElement getElementOnPage(String nameOfPage, String nameOfElement) {
         WebElement webElement = null;

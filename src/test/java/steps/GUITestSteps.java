@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.TestPageAuthForm;
+
 import io.qameta.allure.Allure;
 import io.cucumber.java.ru.*;
 import org.apache.commons.io.FileUtils;
@@ -19,7 +20,9 @@ import java.io.IOException;
 public class GUITestSteps {
     private final Logger log = LogManager.getLogger(getClass());
     private TestPageAuthForm page = new TestPageAuthForm();
+    // private TestPageThemes pageThemes = new TestPageThemes();
     PagesProvider pagesProvider = new PagesProvider();
+    String currentURL = null;
 
     /**
      * @param driver
@@ -115,22 +118,15 @@ public class GUITestSteps {
         } catch (TimeoutException e) {
             Assert.fail(nameOfElement + " не доступна! " + e.getMessage());
         }
-//        finally {
-//            addScreenshot(nameOfElement);
-//        }
     }
 
     @И("появилось информационное окно")
     public void elementFoundInformationWindow() {
         try {
-            //DriverFactory.getDriver().switchTo().alert().getText();
             Assert.assertEquals(DriverFactory.getDriver().switchTo().alert().getText(), "Вы уверены что хотите выйти?");
         } catch (TimeoutException e) {
             Assert.fail("Информационное окно не отобразилось! " + e.getMessage());
         }
-//        finally {
-//            //addScreenshot("информационное окно");
-//        }
     }
 
     @Тогда("я нажал кнопку {string}")
@@ -152,6 +148,90 @@ public class GUITestSteps {
             Assert.fail(nameOfElement + " не доступна! " + e.getMessage());
         } finally {
             addScreenshot(nameOfElement);
+        }
+    }
+
+    @И("я перешел на страницу {string}")
+    public void goToPage(String nameOfPage) {
+        try {
+            page.openPage(nameOfPage);
+        } catch (TimeoutException e) {
+            Assert.fail(nameOfPage + " не доступна! " + e.getMessage());
+        } finally {
+            addScreenshot(nameOfPage);
+        }
+    }
+
+    @Пусть("открыть браузер, загрузить {string} и авторизоваться с {string} и {string}")
+    public void openBrowserAuth(String url, String login, String password) {
+        try {
+            page.openPage(url);
+            page.authFormOpenButton.click();
+            new WebDriverWait(DriverFactory.getDriver(), 2)
+                    .until(ExpectedConditions.elementToBeClickable(page.authFormUsernameField));
+            page.authFormUsernameField.click();
+            page.authFormUsernameField.sendKeys(login);
+            page.authFormPasswordField.click();
+            page.authFormPasswordField.sendKeys(password);
+            page.authFormSubmitButton.click();
+        } catch (TimeoutException e) {
+            Assert.fail(url + " не доступна! " + e.getMessage());
+        } finally {
+            addScreenshot(url);
+        }
+    }
+
+    @Тогда("на {string} отобразились элементы {string}, {string}, {string}")
+    public void elementsDisplayed(String nameOfPage, String arg1, String arg2, String arg3) {
+        try {
+            new WebDriverWait(DriverFactory.getDriver(), 3)
+                    .until(ExpectedConditions.visibilityOf(page.themeCreateTitle)).isEnabled();
+            page.themeCreateDescription.isEnabled();
+            page.themeCreateCancel.isEnabled();
+        } catch (TimeoutException e) {
+            Assert.fail(nameOfPage + " не доступна! " + e.getMessage());
+        } finally {
+            addScreenshot(nameOfPage);
+        }
+    }
+
+    @Тогда("выйти из профиля")
+    public void step() {
+        try {
+            page.userAvatar.click();
+            page.userAccountExitButton.click();
+            page.browserAlertAccept();
+        } catch (TimeoutException e) {
+            Assert.fail("Шаг 2 не доступен! " + e.getMessage());
+        }
+    }
+
+    @Затем("на странице опубликованной темы я нажал на элемент {string}")
+    public void clickTheme(String nameOfElement) {
+        try {
+            new WebDriverWait(DriverFactory.getDriver(), 3)
+                    .until(ExpectedConditions.visibilityOf(page.themeName));
+            currentURL = DriverFactory.getDriver().getCurrentUrl();
+            System.out.println(currentURL);
+            page.openPage(nameOfElement);
+        } catch (TimeoutException e) {
+            Assert.fail("Страница темы не доступна! " + e.getMessage());
+        } finally {
+            addScreenshot("Страница темы");
+        }
+    }
+
+    @И("на {string} отобразился элемент {string} с текстом {string}")
+    public void elementWithText(String nameOfPage, String h1, String titleData) {
+        try {
+            String pageUrl = currentURL.substring(22);
+            String avatarName = new WebDriverWait(DriverFactory.getDriver(), 3)
+                    .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='" + pageUrl + "']"))).getText();
+            Assert.assertEquals(avatarName, titleData);
+        } catch (TimeoutException e) {
+            Assert.fail(titleData + " не доступна! " + e.getMessage());
+        } finally {
+            addScreenshot(titleData);
         }
     }
 
